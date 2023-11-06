@@ -41,6 +41,21 @@ jobs:
           echo Actor: ${{ github.actor }}
           echo Commited by: ${{ github.event.commits[0].author.name }}
 
+  weather: 
+    runs-on: ubuntu-latest
+    env: 
+#      location: '42.1928,24.3336'
+#      lang: en
+#      units: metric
+#     exclude: 'minutely,hourly,daily,alerts,flags'
+      open_weather_map_secret: ${{ secrets.open_weather_map }}
+    steps:
+      - name: Current weather
+      run: curl -s --url "https://api.openweathermap.org/data/2.5/weather?lat=42.1928&lon=24.3336&lang=en&units=metric&exclude=minutely,hourly,daily,alerts,flags&appid=${{ secrets.open_weather_map_secret }}"
+      
+
+
+
   dump:
     runs-on: ubuntu-latest
     steps:
